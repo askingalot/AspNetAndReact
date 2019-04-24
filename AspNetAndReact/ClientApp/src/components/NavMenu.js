@@ -22,6 +22,7 @@ export class NavMenu extends Component {
   }
 
   render () {
+    const isLoggedIn = !!sessionStorage.getItem("jwt_token");
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
@@ -33,12 +34,29 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                </NavItem>
+                {! isLoggedIn &&
+                    <React.Fragment>
+                        <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
+                        </NavItem>
+                    </React.Fragment>
+                }
+                {isLoggedIn &&
+                    <React.Fragment>
+                        <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/logout">Logout</NavLink>
+                        </NavItem>
+                    </React.Fragment>
+                }
               </ul>
             </Collapse>
           </Container>

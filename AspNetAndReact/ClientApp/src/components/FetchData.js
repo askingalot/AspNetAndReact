@@ -7,7 +7,12 @@ export class FetchData extends Component {
     super(props);
     this.state = { forecasts: [], loading: true };
 
-    fetch('api/SampleData/WeatherForecasts')
+      fetch('api/SampleData/WeatherForecasts', {
+        "method": "GET",
+        "headers": {
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt_token")}`
+        }
+      })
       .then(response => response.json())
       .then(data => {
         this.setState({ forecasts: data, loading: false });

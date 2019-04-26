@@ -47,6 +47,9 @@ export class NavMenu extends Component {
                 {isLoggedIn &&
                     <React.Fragment>
                         <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/movies">Movies</NavLink>
+                        </NavItem>
+                        <NavItem>
                           <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
                         </NavItem>
                         <NavItem>

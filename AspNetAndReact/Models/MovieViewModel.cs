@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AspNetAndReact.Models
 {
-    public class Movie
+    public class MovieViewModel
     {
         public int Id { get; set; }
 
@@ -13,6 +12,7 @@ namespace AspNetAndReact.Models
         [Required]
         public int Year { get; set; }
 
-        public List<UserMovie> UserMovies { get; set; }
+        [Required]
+        public bool IsUserFavorite { get; set; }
     }
 }

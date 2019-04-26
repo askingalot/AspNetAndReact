@@ -8,8 +8,33 @@ namespace AspNetAndReact.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        DbSet<Movie> Movie { get; set; }
+        public DbSet<Movie> Movie { get; set; }
 
-        DbSet<UserMovie> UserMovie { get; set; }
+        public DbSet<UserMovie> UserMovie { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Movie>().HasData(
+                new Movie
+                {
+                    Id = 1,
+                    Title = "It's a Wonderful Life",
+                    Year = 1946
+                },
+                new Movie
+                {
+                    Id = 2,
+                    Title = "His Girl Friday",
+                    Year = 1940
+                },
+                new Movie
+                {
+                    Id = 3,
+                    Title = "The Thin Man",
+                    Year = 1934
+                }
+            );
+        }
     }
 }

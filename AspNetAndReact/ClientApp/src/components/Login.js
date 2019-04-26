@@ -3,16 +3,19 @@ import React, { Component } from 'react';
 export class Login extends Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        loading: false
     };
  
     onFieldChange = (evt) => {
-        this.setState({
-            [evt.target.id]: evt.target.value
-        });
+        this.setState({ [evt.target.id]: evt.target.value });
     };
 
-    login = () => {
+    login = (evt) => {
+        evt.preventDefault();
+
+        this.setState({ loading: true });
+
         fetch("/api/account/login", {
             "method": "POST",
             "headers": {
@@ -30,24 +33,24 @@ export class Login extends Component {
 
     render () {
         return (
-            <React.Fragment>
+            <form onSubmit={this.login}>
                 <h1>Login</h1>
                 <div className="form-group">
-                    <label for="email">Email/Username:</label>
+                    <label htmlFor="email">Email/Username:</label>
                     <input type="email" id="email" className="form-control"
                         value={this.state.email} onChange={this.onFieldChange} />
                 </div>
 
                 <div className="form-group">
-                    <label for="password">Password:</label>
+                    <label htmlFor="password">Password:</label>
                     <input type="password" id="password" className="form-control"
                         value={this.state.password} onChange={this.onFieldChange} />
                 </div>
 
-                <button className="btn btn-primary" onClick={this.login}>
+                <button className="btn btn-primary" onClick={this.login} disabled={this.state.loading}>
                     login
                 </button>
-            </React.Fragment>
+            </form>
         );
     }
 }
